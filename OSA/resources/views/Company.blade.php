@@ -19,16 +19,16 @@
 
   <!-- CSS
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <link rel="stylesheet" type="text/css" href="css/general.css">
-  <link rel="stylesheet" href="css/normalize.css">
-  <link rel="stylesheet" href="css/skeleton.css">
+  <link rel="stylesheet" type="text/css" href="{{asset('css/general.css')}}">
+  <link rel="stylesheet" href="{{asset('css/normalize.css')}}">
+  <link rel="stylesheet" href="{{asset('css/skeleton.css')}}">
 
-  <link rel="stylesheet" type="text/css" href="css/component.css" />
+  <link rel="stylesheet" type="text/css" href="{{asset('css/component.css')}}" />
 
   <!-- JS
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <script src="js/classie.js"></script>
-  <script src="js/general.js"></script>
+  <script src="{{asset('js/classie.js')}}"></script>
+  <script src="{{asset('js/general.js')}}"></script>
 
   <!-- Favicon
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
@@ -48,13 +48,13 @@
   <div class="page container">
     <div class="company row">
       <div class="name ten columns">
-        <h2>Company Name</h2>
-        <a class="subText" href="Home.html">Service</a>
+        <h2> {{ $supplier->company_name }} </h2>
+        <a class="subText" href="Home.html"> {{ $supplier->service_type }} </a>
       </div>
 
       <div class="rDisplay rBox two columns">
         <h3 class="rDisplay">
-          4.5
+          {{ $supplier->rating }}
           <span>/5</span>
         </h3>
         <p class="subText rDisplay">220 votes</p>
@@ -63,17 +63,35 @@
 
     <div class="row">
       <div class="company about four columns">
-        <label>Services</label>
-        <p>Shirts</p>
+        @if ( !empty($supplier->business_name) ) 
+          <label>Business Name</label>
+          <p> {{ $supplier->business_name }} </p>
+        @endif
 
-        <label>Address</label>
-        <p>Katipunan Ave, Quezon City</p>
+        @if ( !empty($supplier->address) ) 
+          <label>Address</label>
+          <p> {{ $supplier->address }} </p>
+        @endif
 
-        <label>Phone Number</label>
-        <p>09XX-XXX-XXXX</p>
+        @if ( !empty($supplier->contact_no) ) 
+          <label>Contact Number</label>
+          <p> {{ $supplier->contact_no }} </p>
+        @endif
 
-        <label>Facebook Page</label>
-        <p>@FBPage</p>
+        @if ( !empty($supplier->email) ) 
+          <label>E-mail</label>
+          <p> {{ $supplier->email }} </p>
+        @endif
+
+        @if ( !empty($supplier->fbpage) ) 
+          <label>Facebook Page</label>
+          <p> {{ $supplier->fbpage }} </p>
+        @endif
+
+        @if ( !empty($supplier->website) ) 
+          <label>Website</label>
+          <p> {{ $supplier->website }} </p>
+        @endif
       </div>
 
       <div class="eight columns">

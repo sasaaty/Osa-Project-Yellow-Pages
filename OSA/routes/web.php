@@ -23,3 +23,5 @@ Route::get('/Company', function () {
 Route::get('/Suggestion', function () {
     return view('Form');
 });
+
+Route::resource('Supplier', 'SupplierController');
