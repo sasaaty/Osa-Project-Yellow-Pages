@@ -26,15 +26,15 @@ class CreateDB extends Migration
         Schema::create('supplier', function (Blueprint $table){
             $table->increments('id');
             $table->string('company_name');
-            $table->string('business_name');
-            $table->string('address');
+            $table->string('business_name')->nullable();
+            $table->string('address')->nullable();
             $table->string('contact_no');
-            $table->string('email');
-            $table->string('fbpage');
-            $table->string('website');
+            $table->string('email')->nullable();
+            $table->string('fbpage')->nullable();
+            $table->string('website')->nullable();
             $table->string('service_type');
             $table->string('state');
-            $table->double('rating', 2, 1);
+            $table->double('rating', 2, 1)->nullable();
             $table->timestamps();
         });
 

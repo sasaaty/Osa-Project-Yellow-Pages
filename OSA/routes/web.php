@@ -11,17 +11,16 @@
 |
 */
 
-Route::get('/', function () {
-    return view('Home');
-});
+Route::get('/{filter?}', "HomeController@index");
 
-
-Route::get('/Company', function () {
-    return view('Company');
-});
 
 Route::get('/Suggestion', function () {
     return view('Form');
 });
 
 Route::resource('Supplier', 'SupplierController');
+
+Route::get('/filter={filter}', function($filter) {
+	return view('Suggestion');
+	//return app()->make("\App\Http\Controllers\HomeController")::hotdog($filter);
+});

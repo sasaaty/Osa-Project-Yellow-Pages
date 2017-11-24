@@ -62,7 +62,7 @@
     </div>
 
     <div class="row">
-      <div class="company about four columns">
+      <div class="company four columns">
         @if ( !empty($supplier->business_name) ) 
           <label>Business Name</label>
           <p> {{ $supplier->business_name }} </p>
@@ -90,7 +90,7 @@
 
         @if ( !empty($supplier->website) ) 
           <label>Website</label>
-          <p> {{ $supplier->website }} </p>
+          <p> <a href="{{url($supplier->website)}}">{{ $supplier->website }}</a></p>
         @endif
       </div>
 

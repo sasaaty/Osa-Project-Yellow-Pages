@@ -23,6 +23,7 @@
   <link rel="stylesheet" type="text/css" href="{{asset('css/general.css')}}">
   <link rel="stylesheet" href="{{asset('css/normalize.css')}}">
   <link rel="stylesheet" href="{{asset('css/skeleton.css')}}">
+  <link rel="stylesheet" href="{{asset('css/admin.css')}}">
 
   <link rel="stylesheet" type="text/css" href="{{asset('css/component.css')}}" />
 
@@ -47,33 +48,47 @@
 <!-- Filter Bar
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <div class="filter">
-    <div class=" row filterContent">
-      <div class="services">
-      	<div class="filterButton">
-        	<a href="#">All Services</a>
-        	<img src="{{asset('img/ic_arrow_drop_down_black_18px.svg')}}">
-      	</div>
+    <div class="container">
+      <div class="row">
+        <div class="services">
+          <div class="filterButton">
+            <a>
+              @if (!empty($current) && is_numeric($current))
+                {{$categories[$current-1]->name}}
+              @else  
+                All Services
+              @endif
+            </a>
+            <img src="{{asset('img/ic_arrow_drop_down_black_18px.svg')}}">
+          </div>
 
-        <div class="services-content row">
-        	<div class="three columns">
-	          <a href="#">Venue</a>
-	          <a href="#">Logistical Equipment</a>
-        	</div>
-
-        	<div class="three columns">
-	          <a href="#">Printing & Shirts</a>
-	          <a href="#">Tents</a>
-        	</div>
-
-        	<div class="three columns">
-	          <a href="#">Catering Services</a>
-	          <a href="#">Transportation</a>
-        	</div>
-
-        	<div class="three columns">	
-	          <a href="#">AV Equipment</a>
-	          <a href="#">Other</a>
-        	</div>
+          <div class="services-content">
+            @if (!empty($categories))
+              <?php $c=0; 
+              $first = true;  
+              ?>
+              @for ($i = 0; $i < ceil((count($categories)+1)/4); $i++)
+                <div class="row">
+                  @for ($j = 0; $j < 4; $j++)
+                    @if (!empty($categories[$c]))
+                      @if ($first)
+                        <a class="three columns" href="/">All Services</a>
+                        <?php $first = false; ?>
+                      @else
+                        <a class="three columns" href="{{url('/'.$categories[$c]->id)}}"> {{$categories[$c]->name}} </a>
+                        <?php $c++; ?>
+                      @endif
+                    @else
+                      @break
+                    @endif
+                  @endfor
+                </div>
+                @if (empty($categories[$c]))
+                  @break
+                @endif
+              @endfor
+            @endif
+          </div>
         </div>
       </div>
     </div>
@@ -82,35 +97,22 @@
   <!-- Primary Page Layout
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <div class="itemBox">
-    <div class="item">
-      <h5 class="itemName"><a href="/Company">Company Name</a></h5>
-      <p class="itemService"><a href="/">Service</a></p>
-      <p class="itemContent"><a href="#">Email</a></p>
-      <p class="itemContent">09XX-XXX-XXXX</a></p>
+    @foreach ($suppliers as $supplier)
+      <div class="item">
+        <h5 class="itemName"><a href="{{url('/Supplier/'.$supplier->id)}}"> {{$supplier->company_name}} </a></h5>
+        <p class="itemService"><a href="{{url('/'.$supplier->category_id)}}"> {{$supplier->service_type}} </a></p>
+        
+        <div class="itemDetails">
+          <p class="itemContent"><a href="#"> {{$supplier->email}} </a></p>
+          <p class="itemContent"> {{$supplier->contact_no}} </p>
+          <p class="itemContent itemRate"><strong>★ {{$supplier->rating}}</strong></p>
+        </div>
+      </div>
+    @endforeach
 
-      <p class="itemContent itemRate"><strong>★ 4.5</strong></p>
-    </div>
-
-    <div class="item">
-      <h5 class="itemName"><a href="Company.html">Company Name</a></h5>
-      <p class="itemService"><a href="#">Service</a></p>
-      <p class="itemContent"><a href="#">Email</a></p>
-      <p class="itemContent">09XX-XXX-XXXX</a></p>
-    </div>
-
-    <div class="item">
-      <h5 class="itemName"><a href="Company.html">Company Name</a></h5>
-      <p class="itemService"><a href="#">Service</a></p>
-      <p class="itemContent"><a href="#">Email</a></p>
-      <p class="itemContent">09XX-XXX-XXXX</a></p>
-    </div>
+    <?php $paginator = $suppliers; ?>
+    @include ('pagination.limit_links')
     
-    <div class="item">
-      <h5 class="itemName"><a href="Company.html">Company Name</a></h5>
-      <p class="itemService"><a href="#">Service</a></p>
-      <p class="itemContent"><a href="#">Email</a></p>
-      <p class="itemContent">09XX-XXX-XXXX</a></p>
-    </div>
   </div>
 
 <!-- Scripts

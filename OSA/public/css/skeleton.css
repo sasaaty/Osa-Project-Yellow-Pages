@@ -406,11 +406,7 @@ there.
 /* Larger than mobile */
 @media (min-width: 400px) {
   .services-content{
-    width: 50%;
-    left: 25%;
-  }
-  .filterContent{
-    width: 200px;
+    width:96%;
   }
 
   .filterButton a{
