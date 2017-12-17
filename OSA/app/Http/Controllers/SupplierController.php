@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Supplier;
+use App\Category;
 
 class SupplierController extends Controller
 {
@@ -25,7 +26,8 @@ class SupplierController extends Controller
     public function show($id)
     {
     	$supplier = Supplier::find($id);
-    	return view('Company', array('supplier' => $supplier));
+        $category = Category::where('id', $supplier->category_id)->value('name');
+    	return view('Company', array('supplier' => $supplier, 'category' => $category));
     }
 
     public function edit($id)

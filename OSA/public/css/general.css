@@ -1,3 +1,10 @@
+.test{
+	background-color: red;
+}
+.test2{
+	background-color: blue;
+}
+
 body{
 	background-color: #f3f3f3;
 }
@@ -27,12 +34,7 @@ body{
 
 .menu{
 	padding:10px;
-	float:left;
-}
-
-.close{
-	float:right;
-	padding:10px;
+	cursor: pointer;
 }
 
 .topHead{
@@ -169,6 +171,9 @@ input[type="text"].searchTerm{
 	display: block;
 }
 
+.services:focus .services-content{
+	display: block;
+}
 .company{
 	background-color: white;
 	padding: 20px;
@@ -186,6 +191,11 @@ input[type="text"].searchTerm{
 	color: black;
 }
 
+.company p{
+	overflow: hidden;
+	text-overflow:  ellipsis;
+	white-space: nowrap;
+}
 
 .rDisplay{
 	margin:auto;
@@ -291,4 +301,48 @@ input[type="text"].searchTerm{
 
 textarea{
 	resize: vertical;
+}
+
+.pagination {
+    display: inline-block;
+    line-height: normal;
+}
+
+.pagination a {
+    background-color: white;
+    color: black;
+    float: left;
+    padding: 8px 15px;
+    margin:2px;
+    text-decoration: none;
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.2);
+}
+
+.pagination a.active {
+    background-color: #1EAEDB;
+    color: white;
+}
+
+.pagination a:hover:not(.active) {background-color: #ddd;}
+
+.pagination a:first-child {
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+
+.pagination a:last-child {
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+.pageHolder{
+  width:100%;
+}
+
+.pageMargin{
+  margin: 21px 0 36px 0;
+}
+
+.center{
+  text-align: center;
 }

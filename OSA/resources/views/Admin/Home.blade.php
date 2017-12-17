@@ -5,7 +5,7 @@
   <!-- Basic Page Needs
     –––––––––––––––––––––––––––––––––––––––––––––––––– -->
     <meta charset="utf-8">
-    <title>Suggestion Form</title>
+    <title>Admin-Blue Pages</title>
     <meta name="description" content="">
     <meta name="author" content="">
 
@@ -19,17 +19,16 @@
 
   <!-- CSS
     –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-    <link rel="stylesheet" type="text/css" href="css/general.css">
-    <link rel="stylesheet" href="css/normalize.css">
-    <link rel="stylesheet" href="css/skeleton.css">
-    <link rel="stylesheet" href="css/parallax.css">
-
-    <link rel="stylesheet" type="text/css" href="css/component.css" />
+    <link rel="stylesheet" type="text/css" href="{{asset('css/general.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('css/normalize.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('css/skeleton.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('css/component.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('css/admin.css')}}">
 
   <!-- JS
     –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-    <script src="js/classie.js"></script>
-    <script src="js/general.js"></script>
+    <script src="{{asset('js/classie.js')}}"></script>
+    <script src="{{asset('js/general.js')}}"></script>
 
   <!-- Favicon
     –––––––––––––––––––––––––––––––––––––––––––––––––– -->
@@ -37,36 +36,53 @@
 
   </head>
   <body>
-  <!-- Nav Bar
+  <!-- Top Nav
     –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  @include('topnav')
-  <!-- Header
+    @include('Admin.Nav')
+  <!-- Main Thing
     –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-    <div class="header">
-      
+    <div class="admin-block" id="adminBlock">
+      <div class = "container">
+        @if (!empty($view) && in_array($view, ['Suggestion', 'Accepted', 'Rejected'])) 
+        @include('Admin.View')
+        @endif
+      </div>
     </div>
 
-  <!-- Form
-    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <div class = "company page container" style="padding:20px">
-    @include('Form')
-  </div>
+    <div id="modalWhole" class="modal-box">
+      <div id="modalContent" class="admin-block">
+        <div class="container">
+          <div class="company">
+            @include('Admin.Form')
+          </div>
+        </div>
+      </div>
+    </div>
 
-    <!-- Scripts
+
+<!-- Scripts
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <script>
-    var menuLeft = document.getElementById( 'cbp-spmenu-s1' )
+    var menuLeft = document.getElementById( 'cbp-spmenu-s1' );
+    var mainContent = document.getElementById( 'adminBlock' );
+    var modalContent = document.getElementById( 'modalContent' );
 
     function menuToggle(x) {
       classie.toggle( x, 'active' );
       classie.toggle( menuLeft, 'cbp-spmenu-open' );
+      classie.toggle( mainContent, 'admin-close' );;
+      classie.toggle( modalContent, 'admin-close' );
     };
+
+    var modalWhole = document.getElementById('modalWhole');
+
+    function editToggle(x){
+      classie.toggle(modalWhole, 'modal-open');
+    }
   </script>
-
-    <!-- Always wrap checkbox and radio inputs in a label and use a <span class="label-body"> inside of it -->
-
-      <!-- Note: The class .u-full-width is just a utility class shorthand for width: 100% -->
 <!-- End Document
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+</body>
+</html>
 </body>
 </html>

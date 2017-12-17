@@ -8,20 +8,17 @@ use App\Category;
 class HomeController extends Controller
 {
     //
-    public function index($filter = null){
-    	$suppliers = Supplier::when($filter, function ($query) use($filter){
-    							return $query->where('category_id', $filter);
+    public function index(Request $request){
+        $search = $request->input('search');
+        $category = $request->input('category');
+    	$suppliers = Supplier::when($category, function ($query) use($category){
+    							return $query->where('category_id', $category);
     						})
+                            ->where('state', "Accepted")
     						->orderBy('rating', 'desc')
     						->paginate(12);
-    	$categories = Category::all();
-    	if(empty($filter)){
-	        return view('Home', ['suppliers' => $suppliers, 'categories' => $categories]);
-    	}else{
-    		return view('Home', ['suppliers' => $suppliers, 'categories' => $categories, 'current' => $filter]);
-    	}
-    }
-    public function hotdog($nanay) {
-        return "nanay";
+    	$categoriesList = Category::all();
+    	
+    	return view('Home', ['suppliers' => $suppliers, 'categories' => $categoriesList, 'current' => $category, 'search' => $search]);
     }
 }

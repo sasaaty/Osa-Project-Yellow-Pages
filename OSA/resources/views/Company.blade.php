@@ -5,7 +5,7 @@
   <!-- Basic Page Needs
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <meta charset="utf-8">
-  <title>Your page title here :)</title>
+  <title>Blue Pages - {{$supplier->company_name}}</title>
   <meta name="description" content="">
   <meta name="author" content="">
 
@@ -49,7 +49,10 @@
     <div class="company row">
       <div class="name ten columns">
         <h2> {{ $supplier->company_name }} </h2>
-        <a class="subText" href="Home.html"> {{ $supplier->service_type }} </a>
+        <span class="subText"> 
+          <a href="{{route('search', ['category' => $supplier->category_id])}}"> {{ $category }} </a> &bull; 
+          <a href=""> {{ $supplier->service_type }} </a> 
+        </span>
       </div>
 
       <div class="rDisplay rBox two columns">
@@ -62,7 +65,7 @@
     </div>
 
     <div class="row">
-      <div class="company four columns">
+      <div class="company five columns">
         @if ( !empty($supplier->business_name) ) 
           <label>Business Name</label>
           <p> {{ $supplier->business_name }} </p>
@@ -94,7 +97,7 @@
         @endif
       </div>
 
-      <div class="eight columns">
+      <div class="seven columns">
         <div class="company row">
           <form>
             <label class="comment-name">Comment</label>

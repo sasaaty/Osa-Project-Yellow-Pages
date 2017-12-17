@@ -20,10 +20,9 @@
 
   <!-- CSS
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <link rel="stylesheet" type="text/css" href="{{asset('css/general.css')}}">
+  <link rel="stylesheet" href="{{asset('css/general.css')}}">
   <link rel="stylesheet" href="{{asset('css/normalize.css')}}">
   <link rel="stylesheet" href="{{asset('css/skeleton.css')}}">
-  <link rel="stylesheet" href="{{asset('css/admin.css')}}">
 
   <link rel="stylesheet" type="text/css" href="{{asset('css/component.css')}}" />
 
@@ -56,7 +55,7 @@
               @if (!empty($current) && is_numeric($current))
                 {{$categories[$current-1]->name}}
               @else  
-                All Services
+                All Services 
               @endif
             </a>
             <img src="{{asset('img/ic_arrow_drop_down_black_18px.svg')}}">
@@ -75,7 +74,7 @@
                         <a class="three columns" href="/">All Services</a>
                         <?php $first = false; ?>
                       @else
-                        <a class="three columns" href="{{url('/'.$categories[$c]->id)}}"> {{$categories[$c]->name}} </a>
+                        <a class="three columns" href="{{route('search', ['category' => $categories[$c]->id])}}"> {{$categories[$c]->name}} </a>
                         <?php $c++; ?>
                       @endif
                     @else
@@ -100,7 +99,7 @@
     @foreach ($suppliers as $supplier)
       <div class="item">
         <h5 class="itemName"><a href="{{url('/Supplier/'.$supplier->id)}}"> {{$supplier->company_name}} </a></h5>
-        <p class="itemService"><a href="{{url('/'.$supplier->category_id)}}"> {{$supplier->service_type}} </a></p>
+        <p class="itemService"><a href="{{route('search', ['category' => $supplier->category_id])}}"> {{$supplier->service_type}} </a></p>
         
         <div class="itemDetails">
           <p class="itemContent"><a href="#"> {{$supplier->email}} </a></p>
