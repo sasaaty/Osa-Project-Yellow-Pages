@@ -18,6 +18,8 @@ Route::get('/Suggestion', function () {
     return view('Suggestion');
 });
 
+Route::post('/Suggestion', 'FormsController@insert');
+
 Route::get('/Admin/View/{view}', 'AdminController@index');
 
 Route::get('/Admin/Add', 'AdminController@add');
