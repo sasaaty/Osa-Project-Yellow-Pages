@@ -35,14 +35,15 @@ class CreateDB extends Migration
             $table->string('service_type');
             $table->string('state');
             $table->double('rating', 2, 1)->nullable();
+            $table->integer('admin_id')->unsigned()->nullable();
             $table->timestamps();
         });
 
         Schema::create('suggestion', function(Blueprint $table){
             $table->integer('supplier_id')->unsigned();
             $table->integer('user_id')->unsigned();
-            $table->integer('admin_id')->unsigned();
-            $table->text('note_to_admin');
+            $table->integer('admin_id')->unsigned()->nullable();
+            $table->text('note_to_admin')->nullable();
             $table->timestamps();
         });
 
@@ -50,11 +51,15 @@ class CreateDB extends Migration
             $table->increments('id');
             $table->integer('user_id')->unsigned();
             $table->integer('supplier_id')->unsigned();
-            $table->integer('admin_id')->unsigned();
+            $table->integer('admin_id')->unsigned()->nullable();
             $table->integer('rating');
             $table->text('review_content');
             $table->boolean('is_visible');
             $table->timestamps();
+        });
+
+        Schema::table('supplier', function(Blueprint $table){
+            $table->foreign('admin_id')->references('id')->on('user');
         });
 
         Schema::table('suggestion', function(Blueprint $table){

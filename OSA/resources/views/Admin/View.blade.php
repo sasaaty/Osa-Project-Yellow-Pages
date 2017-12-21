@@ -63,11 +63,12 @@
 
           @if(count($suppliers) > 0)
             @foreach($suppliers as $supplier)
-            <tr>
+            <tr id="supplier{{$supplier->id}}">
               <td><input type="checkbox" name=""></td>
               <td onclick="editToggle(this)">{{$supplier->company_name}}</td>
               <td onclick="editToggle(this)">{{$supplier->service_type}}</td>
               <td onclick="editToggle(this)">{{$supplier->contact_no}}</td>
+              <input type="hidden" value="{{supplier->id}}">
             </tr>
             @endforeach
           @else
@@ -84,6 +85,4 @@
   </div>
 
 <script src="{{asset('js/jquery-3.2.1.min.js')}}"></script>
-<script>
-  
-</script>
+<script src="{{asset('js/admin-supplier.js')}}"></script>  

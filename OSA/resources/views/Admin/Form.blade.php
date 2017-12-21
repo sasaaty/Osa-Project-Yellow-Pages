@@ -25,8 +25,8 @@
 
     <div class="row">
       <div class="six columns">
-        <label for="CompanyEmail">Email</label>
-        <input class="u-full-width" placeholder="sdf@gmail.com" type="email" id="website" required>
+        <label for="Email">Email</label>
+        <input class="u-full-width" placeholder="sdf@gmail.com" type="email" name="Email" required>
       </div>
       <div class="six columns">
         <label for="Celno">Contact Number</label>
@@ -49,14 +49,14 @@
       </div>
       <div class="six columns">
         <label for="Contact Person">Contact Person</label>
-        <input class="u-full-width" type="text"  name="Contact Person">
+        <input class="u-full-width" type="text"  name="ContactPerson">
       </div>
     </div>
 
     <div class="row">
       <div class="six columns">
         <label for="Website">Website</label>
-        <input class="u-full-width" type="text" name="website">
+        <input class="u-full-width" type="text" name="Website">
       </div>
 
       <div class="six columns">
@@ -72,5 +72,7 @@
       </div>
     </div>
     <button class="button" type="clear">clear</button>
-    <input class="button-primary u-pull-right" type="submit" value="Submit">
+    <button class="button-primary u-pull-right" type="submit">submit</button>
 </form>
+
+<meta name="csrf-token" content="{{ csrf_token() }}">
