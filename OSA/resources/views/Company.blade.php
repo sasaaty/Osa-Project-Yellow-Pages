@@ -49,10 +49,7 @@
     <div class="company row">
       <div class="name ten columns">
         <h2> {{ $supplier->company_name }} </h2>
-        <span class="subText"> 
-          <a href="{{route('search', ['category' => $supplier->category_id])}}"> {{ $category }} </a> &bull; 
-          <a href=""> {{ $supplier->service_type }} </a> 
-        </span>
+          <a class="subText" href="{{route('search', ['category' => $supplier->category_id])}}"> {{ $category }} </a>
       </div>
 
       <div class="rDisplay rBox two columns">

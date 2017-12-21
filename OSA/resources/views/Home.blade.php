@@ -99,7 +99,7 @@
     @foreach ($suppliers as $supplier)
       <div class="item">
         <h5 class="itemName"><a href="{{url('/Supplier/'.$supplier->id)}}"> {{$supplier->company_name}} </a></h5>
-        <p class="itemService"><a href="{{route('search', ['category' => $supplier->category_id])}}"> {{$supplier->service_type}} </a></p>
+        <p class="itemService"><a href="{{route('search', ['category' => $supplier->category_id])}}"> {{$categories[$supplier->category_id - 1]->name}} </a></p>
         
         <div class="itemDetails">
           <p class="itemContent"><a href="#"> {{$supplier->email}} </a></p>

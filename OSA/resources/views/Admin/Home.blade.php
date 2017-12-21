@@ -44,20 +44,27 @@
     <div class="admin-block" id="adminBlock">
       <div class = "container">
         @if (!empty($view) && in_array($view, ['Suggestion', 'Accepted', 'Rejected'])) 
-        @include('Admin.View')
+          @include('Admin.View')
+        @else
+          <div class="company admin-head">
+            <?php $title = "New Supplier"; ?>
+            @include('Form')
+          </div>
         @endif
       </div>
     </div>
 
-    <div id="modalWhole" class="modal-box">
-      <div id="modalContent" class="admin-block">
-        <div class="container">
-          <div class="company">
-            @include('Admin.Form')
+    @if (!empty($view) && in_array($view, ['Suggestion', 'Accepted', 'Rejected']))
+      <div id="modalWhole" class="modal-box">
+        <div id="modalContent" class="admin-block">
+          <div class="container">
+            <div class="company">
+              @include('Admin.Form')
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    @endif
 
 
 <!-- Scripts

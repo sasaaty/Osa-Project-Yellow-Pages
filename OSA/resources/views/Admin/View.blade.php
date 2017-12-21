@@ -31,10 +31,6 @@
             @endif
           @endforeach
         </select>
-        <select class="flex-space">
-          <option>All Subcategories</option>
-          <option>Other</option>
-        </select>
         <button type="submit" class="admin-btn"><img src="{{asset('img/ic_filter_list_black_24px.svg')}}"></button>
       </form>
     </div>  
@@ -66,7 +62,7 @@
             <tr>
               <td><input type="checkbox" name=""></td>
               <td onclick="editToggle(this)">{{$supplier->company_name}}</td>
-              <td onclick="editToggle(this)">{{$supplier->service_type}}</td>
+              <td onclick="editToggle(this)">{{$categories[$supplier->category_id - 1]->name}}</td>
               <td onclick="editToggle(this)">{{$supplier->contact_no}}</td>
             </tr>
             @endforeach
@@ -83,7 +79,13 @@
     @include('pagination.limit_links')
   </div>
 
-<script src="{{asset('js/jquery-3.2.1.min.js')}}"></script>
-<script>
-  
-</script>
+  <script>
+    var xhttp;
+    if (window.XMLHttpRequest) {
+      // code for modern browsers
+      xhttp = new XMLHttpRequest();
+      } else {
+      // code for IE6, IE5
+      xhttp = new ActiveXObject("Microsoft.XMLHTTP");
+    }
+  </script>

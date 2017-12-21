@@ -1,6 +1,6 @@
 <form>
     <div>
-      <h1>Supplier Suggestion</h1>
+      <h1>{{$title}}</h1>
     </div>
 
     <div class="row">
