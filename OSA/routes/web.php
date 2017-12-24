@@ -14,11 +14,11 @@
 Route::get('/', array('as'=>'search', 'uses' => 'HomeController@index'));
 
 
-Route::get('/Suggestion', function () {
+Route::get('Suggestion', function () {
     return view('Suggestion');
 });
 
-Route::post('/Suggestion', 'FormsController@insert');
+Route::post('/Suggestion', array ('uses'=>'FormsController@insert'));
 
 Route::get('/Admin/View/{view}', 'AdminController@index');
 
