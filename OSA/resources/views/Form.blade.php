@@ -1,8 +1,8 @@
-<form action = "/Suggestion" method = "post">
+<form  method = "post">
     <div>
       <h1>{{$title}}</h1>
     </div>
-
+    {{ csrf_field()}}
     <div class="row">
       <div class="six columns">
         <label for="CompanyName">Company Name</label>
@@ -37,14 +37,14 @@
       <div class="six columns">
         <label for="BusinessType">Type of Business</label>
         <select class="u-full-width" id="BusinessType" name="BusinessType">
-          <option value="Venue">Venue</option>
-          <option value="LogisticalEquipment">Logistical Equipment</option>
-          <option value="PrintingShirts">Printing & Shirts</option>
-          <option value="Tents">Tents</option>
-          <option value="CateringServices">Catering Services</option>
-          <option value="Transportation">Transportation</option>
-          <option value="AVEquiptment">AV Equiptment</option>
-          <option value="Other">Other</option>
+          <option value="1">Venue</option>
+          <option value="2">Logistical Equipment</option>
+          <option value="3">Printing & Shirts</option>
+          <option value="4">Tents</option>
+          <option value="5">Catering Services</option>
+          <option value="6">Transportation</option>
+          <option value="7">AV Equiptment</option>
+          <option value="8">Other</option>
         </select>
       </div>
       <div class="six columns">
