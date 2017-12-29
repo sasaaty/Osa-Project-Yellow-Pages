@@ -22,6 +22,8 @@ Route::post('/Suggestion', array ('uses'=>'FormsController@insert'));
 
 Route::get('/Admin/View/{view}', 'AdminController@index');
 
+Route::get('/Admin/View/{view}/{id}', 'AdminController@view');
+
 Route::get('/Admin/Add', 'AdminController@add');
 
 Route::resource('Supplier', 'SupplierController');

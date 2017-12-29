@@ -33,11 +33,33 @@
   background-color: #f3f3f3;
 }
 
-.admin-head{
+.admin-head, .tab a{
   border-style: solid;
   border-color: #d5d5d5;
   border-width: 0 0 2px 0;
   margin-bottom: 20px;
+}
+
+.tab a{
+  text-transform: uppercase;
+  border-color: #33C3F0;
+  padding: 5px 0 5px 0;
+  float: left;
+  text-align: center;
+  width: 50%;
+  cursor: pointer;
+}
+
+@media (min-width: 550px){
+  .tab a{
+    padding: 10px 0 10px 0;
+  }
+}
+
+.tab a.current{
+  background-color: #33C3F0;
+  color: white;
+  cursor: default;
 }
 
 .scroll-overflow-x{
@@ -86,6 +108,14 @@
 
 .flex-space{
   margin-right: 4px;
+}
+
+.body-scroll{
+  overflow: hidden;
+}
+
+.modal-pad{
+  padding-right: 17px;
 }
 
 .modal-box.modal-open{

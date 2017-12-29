@@ -1,13 +1,18 @@
   <?php 
   $searchPlaceHolder = "";
+  $button1 = "accept";
+  $button2 = "reject";
   if ($view == "Suggestion"){
     $searchPlaceHolder = "suggested suppliers";
   }elseif($view == "Accepted"){
     $searchPlaceHolder = "accepted suppliers";
+    $button1 = null;
   }elseif($view == "Rejected"){
+    $button2 = "delete";
     $searchPlaceHolder = "rejected suppliers";
   }
   ?>
+  <span></span>
   <div class="company row">
     <div class="twelve columns">
       <div class="row admin-head">
@@ -44,8 +49,10 @@
             <input type="checkbox" name="">
             <img src="{{asset('img/ic_arrow_drop_down_black_18px.svg')}}">
           </div>
-          <button class="flex-space">accept</button>
-          <button class="flex-space">reject</button>
+          @if (!empty($button1))
+            <button class="flex-space">{{$button1}}</button>
+          @endif
+          <button class="flex-space">{{$button2}}</button>
         </form>
       </div>
       <div class="scroll-overflow-x">
@@ -61,15 +68,17 @@
             @foreach($suppliers as $supplier)
             <tr>
               <td><input type="checkbox" name=""></td>
-              <td onclick="editToggle(this)">{{$supplier->company_name}}</td>
-              <td onclick="editToggle(this)">{{$categories[$supplier->category_id - 1]->name}}</td>
-              <td onclick="editToggle(this)">{{$supplier->contact_no}}</td>
+              <td>{{$supplier->company_name}}</td>
+              <td>{{$categories[$supplier->category_id - 1]->name}}</td>
+              <td>{{$supplier->contact_no}}</td>
+              <input type="hidden" value="{{$supplier->id}}">
             </tr>
             @endforeach
           @else
             <tr><td class="none" colspan="1000">None</td></tr>
           @endif
         </table>
+        <input type="hidden" value="{{$view}}">
       </div>
     </div>        
   </div>
@@ -78,14 +87,3 @@
     <?php $paginator = $suppliers; ?>
     @include('pagination.limit_links')
   </div>
-
-  <script>
-    var xhttp;
-    if (window.XMLHttpRequest) {
-      // code for modern browsers
-      xhttp = new XMLHttpRequest();
-      } else {
-      // code for IE6, IE5
-      xhttp = new ActiveXObject("Microsoft.XMLHTTP");
-    }
-  </script>
