@@ -406,11 +406,7 @@ there.
 /* Larger than mobile */
 @media (min-width: 400px) {
   .services-content{
-    width: 50%;
-    left: 25%;
-  }
-  .filterContent{
-    width: 200px;
+    width:96%;
   }
 
   .filterButton a{
@@ -431,10 +427,17 @@ there.
   .name{
     margin-bottom: 0px;
   }
+  
+  .tab a{
+    padding: 10px 0 10px 0;
+  }
 }
 
 /* Larger than tablet */
 @media (min-width: 750px) {
+  .admin-block{
+    margin-left: 240px;
+  }
   .rBox{
     padding: 0 0 0 20px;
   }

@@ -1,3 +1,10 @@
+.test{
+	background-color: red;
+}
+.test2{
+	background-color: blue;
+}
+
 body{
 	background-color: #f3f3f3;
 }
@@ -16,13 +23,8 @@ body{
 	margin-bottom: 36px;
 }
 
-.filterContent{
-	width: 150px;
-	margin: auto; 
-}
 .filterButton{
-	padding:20px;
-	display: inline-block;
+	display: inline;
 }
 
 .filterButton a{
@@ -32,17 +34,16 @@ body{
 
 .menu{
 	padding:10px;
-	float:left;
+	cursor: pointer;
 }
 
-.close{
-	float:right;
-	padding:10px;
+.topHead{
+	padding:10px 0 0 0;
+	font-size:30px;
 }
 
 .osa a{
-	padding:6px 0 6px 0;
-	font-size:36px;
+	width:200px;
 	text-align: center;
 	display: block;
 	margin:auto;
@@ -69,6 +70,12 @@ body{
 	flex-wrap: wrap;
 }
 
+.itemDetails{
+	position: absolute;
+	bottom: 5px; 
+	width: 100%;
+}
+
 .item{
 	width:100%;
 	padding: 10px;
@@ -79,6 +86,9 @@ body{
 	min-width: 180px;
 	cursor: pointer;
 	border-radius: 5px;
+	position: relative;
+	min-height: 160px;
+	overflow: hidden;
 }
 
 .item h5 a{
@@ -135,18 +145,18 @@ input[type="text"].searchTerm{
 }
 
 .services{
+	padding: 10px;
 	float: left;
 	overflow: hidden;
 }
 .services-content{
 	border-radius: 5px;
 	padding:20px;
-	margin-top: -15px;
 	display: none;
 	position: absolute;
 	background-color: white;
 	width: 100%;
-    left: 0;
+	left:0;
     z-index: 1; 
 	box-shadow: 0px 1px 4px 2px rgba(0, 0, 0, 0.2);
 }
@@ -161,6 +171,9 @@ input[type="text"].searchTerm{
 	display: block;
 }
 
+.services:focus .services-content{
+	display: block;
+}
 .company{
 	background-color: white;
 	padding: 20px;
@@ -172,6 +185,16 @@ input[type="text"].searchTerm{
 .company h2{
 	line-height: normal;
 	margin-bottom: 0;
+}
+
+.company a{
+	color: black;
+}
+
+.company p{
+	overflow: hidden;
+	text-overflow:  ellipsis;
+	white-space: nowrap;
 }
 
 .rDisplay{
@@ -278,4 +301,48 @@ input[type="text"].searchTerm{
 
 textarea{
 	resize: vertical;
+}
+
+.pagination {
+    display: inline-block;
+    line-height: normal;
+}
+
+.pagination a {
+    background-color: white;
+    color: black;
+    float: left;
+    padding: 8px 15px;
+    margin:2px;
+    text-decoration: none;
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.2);
+}
+
+.pagination a.active {
+    background-color: #1EAEDB;
+    color: white;
+}
+
+.pagination a:hover:not(.active) {background-color: #ddd;}
+
+.pagination a:first-child {
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+
+.pagination a:last-child {
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+.pageHolder{
+  width:100%;
+}
+
+.pageMargin{
+  margin: 21px 0 36px 0;
+}
+
+.center{
+  text-align: center;
 }

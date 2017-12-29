@@ -1,144 +1,76 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
+<form  method = "post">
+    <div>
+      <h1>{{$title}}</h1>
+    </div>
+    {{ csrf_field()}}
+    <div class="row">
+      <div class="six columns">
+        <label for="CompanyName">Company Name</label>
+        <input class="u-full-width" type="text"  id="CompanyName" name="CompanyName" required>
+      </div>
 
-  <!-- Basic Page Needs
-    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-    <meta charset="utf-8">
-    <title>Suggestion Form</title>
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-  <!-- Mobile Specific Metas
-    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  <!-- FONT
-    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-    <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
-
-  <!-- CSS
-    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-    <link rel="stylesheet" type="text/css" href="css/general.css">
-    <link rel="stylesheet" href="css/normalize.css">
-    <link rel="stylesheet" href="css/skeleton.css">
-    <link rel="stylesheet" href="css/parallax.css">
-
-    <link rel="stylesheet" type="text/css" href="css/component.css" />
-
-  <!-- JS
-    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-    <script src="js/classie.js"></script>
-    <script src="js/general.js"></script>
-
-  <!-- Favicon
-    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-    <link rel="icon" type="image/png" href="images/favicon.png">
-
-  </head>
-  <body>
-  <!-- Nav Bar
-    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  @include('topnav')
-  <!-- Header
-    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-    <div class="header">
-      
+      <div class="six columns">
+        <label for="BusinessName">Business Name</label>
+        <input class="u-full-width" type="text"  id="BusinessName" name="BusinessName">
+      </div>
     </div>
 
-  <!-- Form
-    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-    <form>
-      <div class = "company page container" style="padding:20px">
-        <h1>Supplier Suggestion</h1>
-        <div class="row">
-          <div class="six columns">
-            <label for="CompanyName">Company Name</label>
-            <input class="u-full-width" type="text"  id="CompanyName" required>
-          </div>
-
-          <div class="six columns">
-            <label for="BusinessName">Business Name</label>
-            <input class="u-full-width" type="text"  id="BusinessName">
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="twelve columns">
-            <label for="Address">Address</label>
-            <input class="u-full-width" type="text"  id="Address">
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="six columns">
-            <label for="CompanyEmail">Email</label>
-            <input class="u-full-width" placeholder="sdf@gmail.com" type="email" id="website" required>
-          </div>
-          <div class="six columns">
-            <label for="Celno">Contact Number</label>
-            <input class="u-full-width" type="tel"  id="Celno" required>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="six columns">
-            <label for="BusinessType">Type of Business</label>
-            <select class="u-full-width" id="BusinessType">
-              <option value="Venue">Venue</option>
-              <option value="LogisticalEquipment">Logistical Equipment</option>
-              <option value="PrintingShirts">Printing & Shirts</option>
-              <option value="Tents">Tents</option>
-              <option value="CateringServices">Catering Services</option>
-              <option value="Transportation">Transportation</option>
-              <option value="AVEquiptment">AV Equiptment</option>
-              <option value="Other">Other</option>
-            </select>
-          </div>
-          <div class="six columns">
-            <label for="Contact Person">Contact Person</label>
-            <input class="u-full-width" type="text"  id="Contact Person">
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="six columns">
-            <label for="Website">Website</label>
-            <input class="u-full-width" type="text" id="website">
-          </div>
-
-          <div class="six columns">
-            <label for="Facebook">Facebook Page</label>
-            <input class="u-full-width" type = "text" id="Facebook">
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="twelve columns">
-            <label for="Notes">Notes for Administrator</label>
-            <textarea class="u-full-width" id="Notes"></textarea>
-          </div>
-        </div>
-        <button class="button" type="clear">clear</button>
-        <input class="button-primary u-pull-right" type="submit" value="Submit">
+    <div class="row">
+      <div class="twelve columns">
+        <label for="Address">Address</label>
+        <input class="u-full-width" type="text"  id="Address" name="Address">
       </div>
-    </form>
+    </div>
 
-    <!-- Scripts
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <script>
-    var menuLeft = document.getElementById( 'cbp-spmenu-s1' )
+    <div class="row">
+      <div class="six columns">
+        <label for="CompanyEmail">Email</label>
+        <input class="u-full-width" placeholder="sdf@gmail.com" type="email" id="website" name = "email"required>
+      </div>
+      <div class="six columns">
+        <label for="Celno">Contact Number</label>
+        <input class="u-full-width" type="tel"  id="Celno" name="Celno"required>
+      </div>
+    </div>
 
-    function menuToggle(x) {
-      classie.toggle( x, 'active' );
-      classie.toggle( menuLeft, 'cbp-spmenu-open' );
-    };
-  </script>
+    <div class="row">
+      <div class="six columns">
+        <label for="BusinessType">Type of Business</label>
+        <select class="u-full-width" id="BusinessType" name="BusinessType">
+          <option value="1">Venue</option>
+          <option value="2">Logistical Equipment</option>
+          <option value="3">Printing & Shirts</option>
+          <option value="4">Tents</option>
+          <option value="5">Catering Services</option>
+          <option value="6">Transportation</option>
+          <option value="7">AV Equiptment</option>
+          <option value="8">Other</option>
+        </select>
+      </div>
+      <div class="six columns">
+        <label for="Contact Person">Contact Person</label>
+        <input class="u-full-width" type="text"  id="Contact Person" name = "ContactPerson">
+      </div>
+    </div>
 
-    <!-- Always wrap checkbox and radio inputs in a label and use a <span class="label-body"> inside of it -->
+    <div class="row">
+      <div class="six columns">
+        <label for="Website">Website</label>
+        <input class="u-full-width" type="text" id="website" name= "website">
+      </div>
 
-      <!-- Note: The class .u-full-width is just a utility class shorthand for width: 100% -->
-<!-- End Document
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-</body>
-</html>
+      <div class="six columns">
+        <label for="Facebook">Facebook Page</label>
+        <input class="u-full-width" type = "text" id="Facebook" name="Facebook">
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="twelve columns">
+        <label for="Notes">Notes for Administrator</label>
+        <textarea class="u-full-width" id="Notes" name = "Notes"></textarea>
+      </div>
+    </div>
+    <button class="button" type="clear">clear</button>
+    <input class="button-primary u-pull-right" type="submit" value="Submit">
+</form>
