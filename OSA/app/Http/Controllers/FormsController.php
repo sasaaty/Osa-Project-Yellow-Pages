@@ -10,7 +10,7 @@ use App\Supplier;
 class FormsController extends Controller{
 
 	function insert(Request $req){
-		
+		//Supplier Data
 		$company_name = $req-> input('CompanyName');
 		$business_name = $req-> input('BusinessName');
 		$address = $req -> input('Address');
@@ -23,12 +23,7 @@ class FormsController extends Controller{
 		$state = "Suggestion";
 
 
-		$note_to_admin = $req -> input('Notes');
-		$data1 = array('note_to_admin' => $note_to_admin );
-
-		//DB::table('suggestion') -> insert($data1);
-
-		$data2 = array(
+		$supplier_data = array(
 			'company_name' => $company_name , 
 			'business_name' => $business_name,
 			'address' => $address,
@@ -41,8 +36,21 @@ class FormsController extends Controller{
 			"contact_person" => $contact_person );
 
 		
-		DB::table('supplier') -> insert($data2);
-		echo "Success!";
+		$supplier_id = DB::table('supplier') -> insertGetId($supplier_data);
+
+		//Suggestion Data
+
+		$note_to_admin = $req -> input('Notes');
+
+		 $data1 = array(
+		 	'supplier_id' => $supplier_id,
+		 	'user_id' => "1", //ID IS CURRENTLY HARDCODED
+		 	'note_to_admin' => $note_to_admin 
+			);
+
+		 DB::table('suggestion') -> insert($data1);
+
+
 	}
 }
 
