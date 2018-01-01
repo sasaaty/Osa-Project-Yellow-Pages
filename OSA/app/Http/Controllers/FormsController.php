@@ -50,6 +50,7 @@ class FormsController extends Controller{
 
 		 DB::table('suggestion') -> insert($data1);
 
+		 return back();
 
 	}
 }
