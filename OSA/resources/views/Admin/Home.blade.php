@@ -8,6 +8,7 @@
     <title>Admin-Blue Pages</title>
     <meta name="description" content="">
     <meta name="author" content="">
+    <meta name="_token" content="{{csrf_token()}}" />
 
   <!-- Mobile Specific Metas
     –––––––––––––––––––––––––––––––––––––––––––––––––– -->

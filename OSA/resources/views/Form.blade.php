@@ -37,14 +37,9 @@
       <div class="six columns">
         <label for="BusinessType">Type of Business</label>
         <select class="u-full-width" id="BusinessType">
-          <option value="Venue">Venue</option>
-          <option value="LogisticalEquipment">Logistical Equipment</option>
-          <option value="PrintingShirts">Printing & Shirts</option>
-          <option value="Tents">Tents</option>
-          <option value="CateringServices">Catering Services</option>
-          <option value="Transportation">Transportation</option>
-          <option value="AVEquiptment">AV Equiptment</option>
-          <option value="Other">Other</option>
+          @foreach($categories as $category)
+              <option value="{{$category->id}}">{{$category->name}}</option>
+          @endforeach
         </select>
       </div>
       <div class="six columns">
@@ -65,12 +60,14 @@
       </div>
     </div>
 
-    <div class="row">
-      <div class="twelve columns">
-        <label for="Notes">Notes for Administrator</label>
-        <textarea class="u-full-width" id="Notes"></textarea>
+    @if (!empty($view))
+      <div class="row">
+        <div class="twelve columns">
+          <label for="Notes">Notes for Administrator</label>
+          <textarea class="u-full-width" id="Notes"></textarea>
+        </div>
       </div>
-    </div>
-    <button class="button" type="clear">clear</button>
+    @endif
+    <button class="button" type="reset">clear</button>
     <input class="button-primary u-pull-right" type="submit" value="Submit">
 </form>

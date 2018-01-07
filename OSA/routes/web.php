@@ -18,10 +18,16 @@ Route::get('/Suggestion', function () {
     return view('Suggestion');
 });
 
+Route::resource('Supplier', 'SupplierController');
+
 Route::get('/Admin/View/{view}', 'AdminController@index');
 
 Route::get('/Admin/View/{view}/{id}', 'AdminController@view');
 
-Route::get('/Admin/Add', 'AdminController@add');
+Route::put('/Admin/Edit/{id}', 'AdminController@edit');
 
-Route::resource('Supplier', 'SupplierController');
+Route::put('/Admin/Change/{status}', 'AdminController@change');
+
+Route::delete('Admin/Delete', 'AdminController@delete');
+
+Route::get('/Admin/Add', 'AdminController@add');

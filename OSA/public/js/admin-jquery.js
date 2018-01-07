@@ -1,27 +1,172 @@
 $(document).ready(function(){
-	var view =  $('table').siblings('input').val();
-	var url = "/Admin/View/" + view; 
+	var field = [ 
+		$("input[name='company_name']"),
+	    $("input[name='business_name']"),
+	    $("input[name='address']"),
+	    $("input[name='email']"),
+	    $("input[name='contact_no']"),
+	    $("select[name='category_id']"),
+	    $("input[name='contact_person']"),
+	    $("input[name='website']"),
+	    $("input[name='fbpage']"),
+	    $("textarea[name='note_to_admin']"),
+	    $("#suggestor")
+	];
+	
+	var url = "/Admin"; 
 
 	$('table').on('click','tbody tr', function (evt) {
+		var view =  $('table').siblings('input').val();
+		var viewURL = "/View/" + view;
+
 	    var cell= $(evt.target).closest('td');
-	    var supplier_id = cell.siblings('input').val();
+	    var supplier_id = cell.parent().attr("id");
 	 
 	    if( cell.index() > 0){
-	    	$.get(url + '/' + supplier_id, function (data) {
+	    	$.get(url + viewURL + '/' + supplier_id, function (data) {
 	            //success data
-	            $("input[name='CompanyName']").val(data.company_name);
-	            $("input[name='BusinessName']").val(data.business_name);
-	            $("input[name='Address']").val(data.address);
-	            $("input[name='Email']").val(data.email);
-	            $("input[name='CelNo']").val(data.contact_no);
-	            $("select[name='BusinessType']").val(data.category_id);
-	            $("input[name='ContactPerson']").val(data.contact_person);
-	            $("input[name='Website']").val(data.website);
-	            $("input[name='Facebook']").val(data.fbpage);
-	            $("textarea[name='Notes']").val(data.note_to_admin);
+	            field[0].siblings("input[type='hidden']").val(data.company_name);
+	            field[1].siblings("input[type='hidden']").val(data.business_name);
+	            field[2].siblings("input[type='hidden']").val(data.address);
+	            field[3].siblings("input[type='hidden']").val(data.email);
+	            field[4].siblings("input[type='hidden']").val(data.contact_no);
+	            field[5].siblings("input[type='hidden']").val(data.category_id);
+	            field[6].siblings("input[type='hidden']").val(data.contact_person);
+	            field[7].siblings("input[type='hidden']").val(data.website);
+	            field[8].siblings("input[type='hidden']").val(data.fbpage);
+	            field[9].siblings("input[type='hidden']").val(data.note_to_admin);
+	    		
+	    		if(data.suggestor != null){
+	    			field[10].html("Suggested by " + data.suggestor);
+	    		}
+	    		if (data.note_to_admin == null){
+	    			$('#notes').css('display', 'none')
+	    		}else{
+	    			$('#notes').css('display', 'block')
+	    		}
+
+	    		$("#editID").val(supplier_id);
+
+	    		setValue();
 	    		editToggle();
-	        });	
+	        })
 	   }
 	});
 
+	$("#edit").click(function (e){
+		var viewURL = "/Edit/";
+		var supplier_id = $("#editID").val();
+
+		$.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+            }
+        })
+
+		e.preventDefault();
+
+		var formData ={
+			company_name: field[0].val(),
+			business_name: field[1].val(),
+			address: field[2].val(),
+			email: field[3].val(),
+			contact_no: field[4].val(),
+			category_id: field[5].val(),
+			contact_person: field[6].val(),
+			website: field[7].val(),
+			fbpage: field[8].val(),
+			note_to_admin: field[9].val()
+		};		
+			
+		$.ajax({
+			url: url + viewURL + "/" + supplier_id,
+			type: "PUT",
+			data: formData,
+			success: function(data){
+				var filter = $("select[name='cFilter']").val();
+				if(field[5].val() == "All" || data.category_id	== filter){
+					$("#" + supplier_id + " td:nth-child(2)").html(data.company_name);
+					$("#" + supplier_id + " td:nth-child(3)").html(data.category);
+					$("#" + supplier_id + " td:nth-child(4)").html(data.contact_no);
+				}else{
+					$("#" + supplier_id).remove();
+				}
+
+				editToggle();
+			}
+		});
+	});
+
+	$("#action > a").click(function() {
+		var selected = $('table input[type="checkbox"]:checked').map(function(){
+			return $(this).val();
+		}).get();
+
+		if(selected.length > 0){
+			var action = $(this).html()
+			var urlAdd = "";
+			var type = "PUT";
+
+			$.ajaxSetup({
+	            headers: {
+	                'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+	            }
+	        })
+
+			if(action == "Delete"){
+				type = "DELETE";
+				urlAdd = "/Delete";
+			}else{
+				urlAdd = "/Change/" + action + "ed";
+			}
+
+			$.ajax({
+				url: url + urlAdd,
+				type: type,
+				data: {suppliers:selected},
+				success: function(data){
+					location.reload(true);
+				},
+				error: function(tp){
+					alert(tp.responseText)
+				}
+			});
+		}
+	});
+
+	$('#undo').click(function() {
+		setValue()
+	});
+
+	$('#modalWhole').click(function() {
+		editToggle();
+	});
+	$('#adminContent').click(function(e) {
+		e.stopPropagation();
+	});
+
+	function setValue(){
+		for(i = 0; i < field.length; i++){
+			field[i].val(field[i].siblings("input[type='hidden']").val());
+		}
+	}
+
+	$("#checkAll").click(function(){
+	    $("input[type='checkbox']").not(this).prop('checked', this.checked);
+	});
+
+	$("input[type='checkbox']").change(function(){
+		var table = $(this).parents().eq(2);
+		var numAll = table.find("input[type='checkbox']").length;
+		var numChecked = table.find("input[type='checkbox']:checked").length;
+		if(numAll == numChecked){
+			$("#checkAll").prop('checked', true);
+			$("#checkAll").prop('indeterminate', false);
+		}else if(numChecked == 0){
+			$("#checkAll").prop('checked', false);
+			$("#checkAll").prop('indeterminate', false);
+		}else{
+			$("#checkAll").prop('indeterminate', true);
+		}
+	});
 });
