@@ -68,6 +68,9 @@
         </div>
       </div>
     @endif
-    <button class="button" type="reset">clear</button>
-    <input class="button-primary u-pull-right" type="submit" value="Submit">
+    <div class="row">
+      <button class="button" type="reset">clear</button>
+      <input class="button-primary submit-float" type="submit" value="Submit">
+    </div>
+      
 </form>

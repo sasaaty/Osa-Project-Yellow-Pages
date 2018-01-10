@@ -55,7 +55,7 @@
         </form>
       </div>
       <div class="scroll-overflow-x">
-        <table class="admin-table twelve columns">
+        <table id="suppliers" class="admin-table twelve columns">
           <tr>
             <th></th>
             <th>Company Name</th>

@@ -9,10 +9,10 @@
         </div>
 
         <div class="tab">      
-          <a class="current">Details</a>
-          <a>Reviews</a>
+          <a id="details">Details</a>
+          <a id="reviews_btn">Reviews</a>
         </div>
-        <form>
+        <form id="supplierInfo">
             <div class="row">
               <div class="six columns">
                 <label for="company_name">Company Name</label>
@@ -93,6 +93,10 @@
               <input type="hidden" id="editID">
             </a>
         </form>
+
+        <div id="reviewContent">
+          
+        </div>
       </div>
     </div>
   </div>

@@ -15,15 +15,14 @@ $(document).ready(function(){
 	
 	var url = "/Admin"; 
 
-	$('table').on('click','tbody tr', function (evt) {
+	$('#suppliers').on('click','tbody tr', function (evt) {
 		var view =  $('table').siblings('input').val();
-		var viewURL = "/View/" + view;
-
+		var viewURL = "/Get/";
 	    var cell= $(evt.target).closest('td');
 	    var supplier_id = cell.parent().attr("id");
 	 
 	    if( cell.index() > 0){
-	    	$.get(url + viewURL + '/' + supplier_id, function (data) {
+	    	$.get(url + viewURL + supplier_id, function (data) {
 	            //success data
 	            field[0].siblings("input[type='hidden']").val(data.company_name);
 	            field[1].siblings("input[type='hidden']").val(data.business_name);
@@ -36,6 +35,17 @@ $(document).ready(function(){
 	            field[8].siblings("input[type='hidden']").val(data.fbpage);
 	            field[9].siblings("input[type='hidden']").val(data.note_to_admin);
 	    		
+	    		$("#details").addClass("current");
+	            $("#reviews_btn").html("Reviews (" + data.num_reviews + ")");
+	            if(data.num_reviews < 1){
+	            	$("#reviews_btn").addClass("disabled");
+	            }else{
+	            	$("#reviews_btn").removeClass("disabled");
+	            }
+	            if($("#reviews_btn").hasClass("current")){
+	            	$("#reviews_btn").removeClass("current");
+	            }
+
 	    		if(data.suggestor != null){
 	    			field[10].html("Suggested by " + data.suggestor);
 	    		}
@@ -48,8 +58,10 @@ $(document).ready(function(){
 	    		$("#editID").val(supplier_id);
 
 	    		setValue();
+				$("#supplierInfo").show();
+				$("#reviewContent").hide();
 	    		editToggle();
-	        })
+	        });
 	   }
 	});
 
@@ -95,6 +107,54 @@ $(document).ready(function(){
 				editToggle();
 			}
 		});
+	});
+
+	$("#details").click(function(){
+		if(!($(this).hasClass("current"))){
+			$("#details").addClass("current");
+			$("#reviews_btn").removeClass("current");
+			$("#supplierInfo").show();
+			$("#reviewContent").hide();
+		}
+	})
+
+	$("#reviews_btn").click(function(){
+		var supplier_id = $("#editID").val();
+		var viewURL = "/Reviews/" + supplier_id + "/1";
+		if(!($(this).hasClass("disabled") || $(this).hasClass("current"))){
+			$.get(url + viewURL, function(data) {
+				$("#details").removeClass("current");
+				$("#reviews_btn").addClass("current");
+				$("#supplierInfo").hide();
+				$("#reviewContent").show();
+
+				var reviews = data[0].data;
+				for(i = 0; i < reviews.length; i++){
+					var rateHTML = "<div class='comment-rating'>";
+					for(j = 0; j<5; j++){
+						rateHTML += "<span";
+						if(j < reviews[i].rating){
+							rateHTML += " class='rate'";
+						}
+						rateHTML += ">★ </span>";
+					}
+					rateHTML += "</div>";
+					var comment = "<div class='subText'>" + reviews[i].created_at + "</div";					
+					var html = "<div class='bottomBorder'><strong class='comment-name'>" + data.users[i] + "</strong>" 
+							   + rateHTML + "<p class='review'>"
+							   + reviews[i].review_content + "</p>"
+							   + comment + "</div>";
+					
+					if(i>0){
+						$("#reviewContent").append(html);
+					}else{
+						$("#reviewContent").html(html);
+					}
+				}
+			}).fail(function(tp) {
+				alert(tp.responseText);
+			});
+		}
 	});
 
 	$("#action > a").click(function() {

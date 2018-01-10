@@ -50,6 +50,12 @@
   cursor: pointer;
 }
 
+p.review{
+  overflow:auto;
+  text-overflow: clip;
+  white-space: normal 
+}
+
 @media (min-width: 550px){
   .tab a{
     padding: 10px 0 10px 0;
@@ -59,8 +65,14 @@
 .tab a.current{
   background-color: #33C3F0;
   color: white;
-  cursor: default;
+  cursor: auto;
 }
+
+.tab a.disabled{
+  color:#7f7f7f;
+  cursor: auto;
+}
+
 
 .scroll-overflow-x{
   overflow-x: auto;
@@ -79,7 +91,9 @@
 }
 
 .add-button{
-  margin: 1em 1em 1em 1em;
+  display: block;
+  width:80%;
+  margin: 1em auto;
   font-size: 1.1em;
   font-weight: 300;
 }
@@ -199,4 +213,10 @@
 
 .dropdown:hover .dropbtn {
     background-color: #3e8e41;
+}
+
+.bottomBorder{
+  border-style: solid;
+  border-width: 0 0 1px 0;
+  border-color: #7f7f7f;
 }

@@ -419,6 +419,9 @@ there.
   .filterButton .services-content a{
     font-size: 16px;
   }
+  .submit-float{
+    float:right;
+  }
 }
 
 /* Larger than phablet (also point when grid becomes active) */

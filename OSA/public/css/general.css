@@ -167,7 +167,8 @@ input[type="text"].searchTerm{
 	display: block;
 }
 
-.services:hover .services-content{
+.services:hover .services-content, 
+.services:focus .services-content{
 	display: block;
 }
 
@@ -345,4 +346,7 @@ textarea{
 
 .center{
   text-align: center;
+}
+.hide{
+	display: none;
 }

@@ -22,7 +22,9 @@ Route::resource('Supplier', 'SupplierController');
 
 Route::get('/Admin/View/{view}', 'AdminController@index');
 
-Route::get('/Admin/View/{view}/{id}', 'AdminController@view');
+Route::get('/Admin/Get/{id}', 'AdminController@view');
+
+Route::get('/Admin/Reviews/{id}/{page}', 'AdminController@getReviews');
 
 Route::put('/Admin/Edit/{id}', 'AdminController@edit');
 
