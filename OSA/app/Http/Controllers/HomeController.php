@@ -14,6 +14,7 @@ class HomeController extends Controller
     	$suppliers = Supplier::when($category, function ($query) use($category){
     							return $query->where('category_id', $category);
     						})
+                            ->where('company_name', 'LIKE', $search.'%')//Only the earched company is is displayed
                             ->where('state', "Accepted")
     						->orderBy('rating', 'desc')
     						->paginate(12);
