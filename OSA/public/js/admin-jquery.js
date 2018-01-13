@@ -48,6 +48,9 @@ $(document).ready(function(){
 
 	    		if(data.suggestor != null){
 	    			field[10].html("Suggested by " + data.suggestor);
+	    		}else{
+	    			$("#mh").css('height',118);
+	    			$("#mc").css('top',138);
 	    		}
 	    		if (data.note_to_admin == null){
 	    			$('#notes').css('display', 'none')
@@ -59,7 +62,7 @@ $(document).ready(function(){
 
 	    		setValue();
 				$("#supplierInfo").show();
-				$("#reviewContent").hide();
+				$("#review-screen").hide();
 	    		editToggle();
 	        });
 	   }
@@ -114,7 +117,7 @@ $(document).ready(function(){
 			$("#details").addClass("current");
 			$("#reviews_btn").removeClass("current");
 			$("#supplierInfo").show();
-			$("#reviewContent").hide();
+			$("#review-screen").hide();
 		}
 	})
 
@@ -122,11 +125,11 @@ $(document).ready(function(){
 		var supplier_id = $("#editID").val();
 		var viewURL = "/Reviews/" + supplier_id + "/1";
 		if(!($(this).hasClass("disabled") || $(this).hasClass("current"))){
-			$.get(url + viewURL, function(data) {
+			$.get(viewURL, function(data) {
 				$("#details").removeClass("current");
 				$("#reviews_btn").addClass("current");
 				$("#supplierInfo").hide();
-				$("#reviewContent").show();
+				$("#review-screen").show();
 
 				var reviews = data[0].data;
 				for(i = 0; i < reviews.length; i++){
@@ -201,7 +204,7 @@ $(document).ready(function(){
 	$('#modalWhole').click(function() {
 		editToggle();
 	});
-	$('#adminContent').click(function(e) {
+	$('#modal-inner').click(function(e) {
 		e.stopPropagation();
 	});
 

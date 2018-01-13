@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Input;
 use App\Supplier;
 use App\Suggestion;
 use App\User;
@@ -14,7 +13,7 @@ class AdminController extends Controller
 {
     public function index($view, Request $request){
     	$search = $request->input('search');
-        $category = $request->input('category');
+        $category = $request->input('sort');
         if($category == "All"){
         	$category = null;
         }
@@ -72,25 +71,6 @@ class AdminController extends Controller
                 'num_reviews' => count($reviews)
             ]);
         }
-    }
-
-    public function getReviews($id, $page){
-        Input::merge([ 'page' => $page ]);
-        $reviews = Review::where('supplier_id', $id)
-                    ->orderBy('updated_at', 'desc')
-                    ->paginate(10);
-
-        $users = array();
-        foreach($reviews as $review){
-            $user = User::find($review->user_id);
-            $users[] = $user->first_name . " " . $user->last_name;
-        }
-        $reviews->toJson();
-
-        return response()->json([
-            $reviews,
-            'users' => $users
-        ]);
     }
 
     public function edit($id, Request $request){

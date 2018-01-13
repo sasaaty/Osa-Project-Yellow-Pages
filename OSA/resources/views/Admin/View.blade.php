@@ -24,7 +24,7 @@
         </form>
       </div>
       <form class="flex">
-        <select class="flex-space" name="cFilter">
+        <select class="flex-space" name="sort">
           <option value="All">All Categories</option>
 
           @foreach($categories as $category)
@@ -82,6 +82,6 @@
   </div>
 
   <div class="center">
-    <?php $paginator = $suppliers; ?>
+    <?php $paginator = $suppliers->appends(['sort' => $current]); ?>
     @include('pagination.limit_links')
   </div>

@@ -24,7 +24,7 @@ Route::get('/Admin/View/{view}', 'AdminController@index');
 
 Route::get('/Admin/Get/{id}', 'AdminController@view');
 
-Route::get('/Admin/Reviews/{id}/{page}', 'AdminController@getReviews');
+Route::get('/Reviews/{id}/{page}', 'ReviewsController@view');
 
 Route::put('/Admin/Edit/{id}', 'AdminController@edit');
 

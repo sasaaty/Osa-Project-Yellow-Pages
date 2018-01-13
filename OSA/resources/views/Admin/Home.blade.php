@@ -68,7 +68,6 @@
     var menuLeft = document.getElementById( 'cbp-spmenu-s1' );
     var mainContent = document.getElementById( 'adminBlock' );
     var modalContent = document.getElementById( 'modalContent' );
-    var body = document.body;
 
     function menuToggle(x) {
       classie.toggle( x, 'active' );
@@ -81,9 +80,6 @@
 
     function editToggle(){
       classie.toggle(modalWhole, 'modal-open');
-      classie.toggle(mainContent, 'modal-pad');
-
-      classie.toggle( body, 'body-scroll');
     }
   </script>
 <!-- End Document
