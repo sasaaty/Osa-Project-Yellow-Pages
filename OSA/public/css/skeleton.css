@@ -242,6 +242,9 @@ select {
   border-radius: 4px;
   box-shadow: none;
   box-sizing: border-box; }
+textarea{
+  height:150px;
+}
 /* Removes awkward default styles on some inputs for iOS */
 input[type="email"],
 input[type="number"],
@@ -415,6 +418,9 @@ there.
 
   .filterButton .services-content a{
     font-size: 16px;
+  }
+  .submit-float{
+    float:right;
   }
 }
 

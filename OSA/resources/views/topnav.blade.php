@@ -4,9 +4,11 @@
 		<img onclick="menuToggle(this)" class="menu u-pull-right" src="{{asset('img/ic_close_white_36px.svg')}}">
 	</div>
 	<div class="normal">
+		<a href="{{ url('auth/google') }}" class="btn btn-lg btn-danger btn-block">
+				<strong>Login With Google</strong>
+		</a>
 		<a href="/">Search</a>
 		<a href="/Suggestion">Suggest</a>
-		<a href="#">Sign in</a>
 	</div>
 </nav>
 
