@@ -109,7 +109,7 @@
       </div>
     @endforeach
 
-    <?php $paginator = $suppliers->appends(['sort' => $current]); ?>
+    <?php $paginator = $suppliers->appends(['sort' => $current,'search' => $search])  ; ?>
     @include('pagination.limit_links')
     
   </div>
