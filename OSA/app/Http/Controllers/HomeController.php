@@ -14,9 +14,10 @@ class HomeController extends Controller
     	$suppliers = Supplier::when($category, function ($query) use($category){
     							return $query->where('category_id', $category);
     						})
-                            ->where('company_name', 'LIKE', '%'.$search.'%')
+                            ->where('company_name', 'LIKE', '%'.$search)
+                            ->orWhere('company_name', 'LIKE' , $search.'%')
                             ->where('state', "Accepted")
-    						->orderBy('rating', 'desc')
+                            ->orderByRaw("LOCATE('".$search."', company_name) ")
     						->paginate(12);
     	$categoriesList = Category::all();
     	
