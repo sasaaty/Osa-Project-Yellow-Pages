@@ -19,7 +19,7 @@
                 <a class="{{ $paginator->currentPage() == 1 ? ' disabled' : ''}}" href="{{ $paginator->url(1) }}">&laquo;</a> 
 
                 @for ($i = 1; $i <= $paginator->lastPage(); $i++)
-                    @if ($from < $i && $i < $to)    
+                    @if ($from < $i && $i < $to)  
                         <a class="{{ ($paginator->currentPage() == $i) ? ' active' : '' }}" href="{{ $paginator->url($i) }}">{{ $i }}</a>
                     @endif
                 @endfor

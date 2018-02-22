@@ -167,7 +167,8 @@ input[type="text"].searchTerm{
 	display: block;
 }
 
-.services:hover .services-content{
+.services:hover .services-content, 
+.services:focus .services-content{
 	display: block;
 }
 
@@ -231,6 +232,7 @@ input[type="text"].searchTerm{
 
 .comment-name{
 	font-size: 1.1em;
+	display: inline;
 }
 
 .comment-rating{
@@ -238,7 +240,6 @@ input[type="text"].searchTerm{
 }
 
 .rating {
-    float:left;
     margin-bottom: 0;
 }
 
@@ -345,4 +346,7 @@ textarea{
 
 .center{
   text-align: center;
+}
+.hide{
+	display: none;
 }

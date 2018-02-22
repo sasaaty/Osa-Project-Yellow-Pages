@@ -74,7 +74,7 @@
                         <a class="three columns" href="/">All Services</a>
                         <?php $first = false; ?>
                       @else
-                        <a class="three columns" href="{{route('search', ['category' => $categories[$c]->id])}}"> {{$categories[$c]->name}} </a>
+                        <a class="three columns" href="{{route('search', ['sort' => $categories[$c]->id])}}"> {{$categories[$c]->name}} </a>
                         <?php $c++; ?>
                       @endif
                     @else
@@ -109,8 +109,8 @@
       </div>
     @endforeach
 
-    <?php $paginator = $suppliers; ?>
-    @include ('pagination.limit_links')
+    <?php $paginator = $suppliers->appends(['sort' => $current,'search' => $search])  ; ?>
+    @include('pagination.limit_links')
     
   </div>
 

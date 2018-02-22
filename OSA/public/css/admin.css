@@ -1,8 +1,6 @@
 .admin-block{
   margin-top: 76px;
-  position: relative;
   width: auto;
-  overflow: auto;
 }
 
 .admin-block form{
@@ -40,14 +38,23 @@
   margin-bottom: 20px;
 }
 
+.tab{
+  display: flex;
+}
+
 .tab a{
   text-transform: uppercase;
   border-color: #33C3F0;
   padding: 5px 0 5px 0;
-  float: left;
   text-align: center;
   width: 50%;
   cursor: pointer;
+}
+
+p.review{
+  overflow:auto;
+  text-overflow: clip;
+  white-space: normal 
 }
 
 @media (min-width: 550px){
@@ -59,8 +66,14 @@
 .tab a.current{
   background-color: #33C3F0;
   color: white;
-  cursor: default;
+  cursor: auto;
 }
+
+.tab a.disabled{
+  color:#7f7f7f;
+  cursor: auto;
+}
+
 
 .scroll-overflow-x{
   overflow-x: auto;
@@ -79,7 +92,9 @@
 }
 
 .add-button{
-  margin: 1em 1em 1em 1em;
+  display: block;
+  width:80%;
+  margin: 1em auto;
   font-size: 1.1em;
   font-weight: 300;
 }
@@ -115,7 +130,7 @@
 }
 
 .modal-pad{
-  padding-right: 17px;
+  padding:20px 20px 0 20px;
 }
 
 .modal-box.modal-open{
@@ -130,9 +145,50 @@
     top: 0;
     width: 100%; /* Full width */
     height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
     background-color: rgb(0,0,0); /* Fallback color */
     background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+.admin-hor{
+  position: relative;
+  height: 100%;
+}
+
+.full-height{
+  height: 100%;
+}
+
+.admin-ver{
+  width:100%;
+  position:absolute;
+  top:76px;
+  bottom:20px;
+  background-color: white;
+  box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+}
+
+.modal-height{
+  margin-top:0;
+  height:100%;
+}
+
+.modal-head{
+  height:150px;
+  line-height: normal;
+  padding:20px;
+}
+.modal-head h1, .modal-head p{
+  margin-bottom: 15px;
+}
+
+.modal-content{
+  position:absolute;
+  top:170px;
+  bottom:20px;
+  left:20px;
+  right:20px;
+  overflow-y:auto;
 }
 
 .modal-content-alert {
@@ -154,19 +210,26 @@
 
 /* The Close Button */
 .close-btn {
+    position:relative;
+    top:-10px;
     color: #aaaaaa;
     float: right;
-    font-size: 28px;
+    font-size: 40px;
     font-weight: bold;
 }
 
 .close-btn:hover,
 .close-btn:focus {
-    color: #000;
+    color: #33C3F0;
     text-decoration: none;
     cursor: pointer;
 }
 
+@media (min-width: 400px){
+  .close-btn{
+    font-size:50px;
+  }
+}
 /* dropdown */
 .dropdown {
   float: right;
@@ -199,4 +262,10 @@
 
 .dropdown:hover .dropbtn {
     background-color: #3e8e41;
+}
+
+.bottomBorder{
+  border-style: solid;
+  border-width: 0 0 1px 0;
+  border-color: #7f7f7f;
 }
