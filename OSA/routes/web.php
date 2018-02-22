@@ -18,7 +18,9 @@ Route::get('/Suggestion', function () {
     return view('Suggestion');
 });
 
-Route::resource('Supplier', 'SupplierController');
+Route::resource('/Supplier', 'SupplierController');
+
+Route::post('/Suggestion', array ('uses'=>'FormsController@insert'));
 
 Route::get('/Admin/View/{view}', 'AdminController@index');
 
