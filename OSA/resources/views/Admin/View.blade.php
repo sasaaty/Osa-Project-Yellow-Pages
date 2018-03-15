@@ -85,8 +85,5 @@
   <div class="center">
     <?php $paginator = $suppliers->appends(['sort' => $current]); ?>
     @include('pagination.limit_links')
-  </div>
-
-<script src="{{asset('js/jquery-3.2.1.min.js')}}"></script>
-<script src="{{asset('js/admin-supplier.js')}}"></script>  
+  </div>  
   </div>

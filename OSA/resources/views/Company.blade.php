@@ -50,7 +50,7 @@
       <div class="name ten columns">
         <h2> {{ $supplier->company_name }} </h2>
         <span class="subText"> 
-          <a href="{{route('search', ['category' => $supplier->category_id])}}"> {{ $category }} </a> 
+          <a href="{{route('search', ['sort' => $supplier->category_id])}}"> {{ $category }} </a> 
         </span>
       </div>
 

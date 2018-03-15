@@ -91,14 +91,15 @@ $(document).ready(function(){
 			website: field[7].val(),
 			fbpage: field[8].val(),
 			note_to_admin: field[9].val()
-		};		
-			
+		};	
 		$.ajax({
-			url: url + viewURL + "/" + supplier_id,
+			url: url + viewURL + supplier_id,
 			type: "PUT",
 			data: formData,
 			success: function(data){
-				var filter = $("select[name='cFilter']").val();
+				var filter = $("select[name='sort']").val();
+				console.log(filter);
+				console.log(data.category_id);
 				if(field[5].val() == "All" || data.category_id	== filter){
 					$("#" + supplier_id + " td:nth-child(2)").html(data.company_name);
 					$("#" + supplier_id + " td:nth-child(3)").html(data.category);
@@ -108,6 +109,8 @@ $(document).ready(function(){
 				}
 
 				editToggle();
+			}, error: function(x){
+				alert(x.responseText);
 			}
 		});
 	});

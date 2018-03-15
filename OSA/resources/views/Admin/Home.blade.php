@@ -30,6 +30,7 @@
     –––––––––––––––––––––––––––––––––––––––––––––––––– -->
     <script src="{{asset('js/classie.js')}}"></script>
     <script src="{{asset('js/jquery-3.2.1.min.js')}}"></script>
+  <script src="{{asset('js/admin-jquery.js')}}"></script>
 
   <!-- Favicon
     –––––––––––––––––––––––––––––––––––––––––––––––––– -->
@@ -63,7 +64,6 @@
 
 <!-- Scripts
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <script src="{{asset('js/admin-jquery.js')}}"></script>
   <script>
     var menuLeft = document.getElementById( 'cbp-spmenu-s1' );
     var mainContent = document.getElementById( 'adminBlock' );

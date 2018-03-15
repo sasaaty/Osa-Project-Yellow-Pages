@@ -20,7 +20,7 @@ function viewSupplier(id){
 		$("input[name='Website']").val(data.website);
 		$("input[name='Facebook']").val(data.fbpage);
 		$("input[name='Notes']").val(data.note_to_admin);
-	}
+	});
 }
 
 function editSupplier(id){
