@@ -65,7 +65,7 @@ class CreateDB extends Migration
         Schema::table('suggestion', function(Blueprint $table){
             $table->foreign('supplier_id')->references('id')->on('supplier');
             $table->foreign('user_id')->references('id')->on('user');
-            $table->foreign('admin_id')->references('id')->on('user');
+            $table->foreign('admin_id')->references('id')->on('user')->nullable();
         });
 
 

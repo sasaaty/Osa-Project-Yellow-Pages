@@ -8,6 +8,7 @@
     <title>Admin-Blue Pages</title>
     <meta name="description" content="">
     <meta name="author" content="">
+    <meta name="_token" content="{{csrf_token()}}" />
 
   <!-- Mobile Specific Metas
     –––––––––––––––––––––––––––––––––––––––––––––––––– -->
@@ -28,40 +29,41 @@
   <!-- JS
     –––––––––––––––––––––––––––––––––––––––––––––––––– -->
     <script src="{{asset('js/classie.js')}}"></script>
-    <script src="{{asset('js/general.js')}}"></script>
+    <script src="{{asset('js/jquery-3.2.1.min.js')}}"></script>
 
   <!-- Favicon
     –––––––––––––––––––––––––––––––––––––––––––––––––– -->
     <link rel="icon" type="image/png" href="images/favicon.png">
 
   </head>
-  <body>
+  <body id="body">
   <!-- Top Nav
     –––––––––––––––––––––––––––––––––––––––––––––––––– -->
     @include('Admin.Nav')
   <!-- Main Thing
     –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <?php $filterPage = !empty($view) && in_array($view, ['Suggestion', 'Accepted', 'Rejected']); ?>
     <div class="admin-block" id="adminBlock">
       <div class = "container">
-        @if (!empty($view) && in_array($view, ['Suggestion', 'Accepted', 'Rejected'])) 
-        @include('Admin.View')
+        @if ($filterPage) 
+          @include('Admin.View')
+        @else
+          <div class="company admin-head">
+            <?php $title = "New Supplier"; ?>
+            @include('Form')
+          </div>
         @endif
       </div>
     </div>
 
-    <div id="modalWhole" class="modal-box">
-      <div id="modalContent" class="admin-block">
-        <div class="container">
-          <div class="company">
-            @include('Admin.Form')
-          </div>
-        </div>
-      </div>
-    </div>
+    @if ($filterPage)
+      @include('Admin.Modal')
+    @endif
 
 
 <!-- Scripts
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <script src="{{asset('js/admin-jquery.js')}}"></script>
   <script>
     var menuLeft = document.getElementById( 'cbp-spmenu-s1' );
     var mainContent = document.getElementById( 'adminBlock' );
@@ -70,13 +72,13 @@
     function menuToggle(x) {
       classie.toggle( x, 'active' );
       classie.toggle( menuLeft, 'cbp-spmenu-open' );
-      classie.toggle( mainContent, 'admin-close' );;
+      classie.toggle( mainContent, 'admin-close' );
       classie.toggle( modalContent, 'admin-close' );
     };
 
     var modalWhole = document.getElementById('modalWhole');
 
-    function editToggle(x){
+    function editToggle(){
       classie.toggle(modalWhole, 'modal-open');
     }
   </script>

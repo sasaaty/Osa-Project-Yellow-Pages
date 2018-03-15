@@ -10,14 +10,13 @@ class HomeController extends Controller
     //
     public function index(Request $request){
         $search = $request->input('search');
-        $category = $request->input('sort');
+        $category = $request->input('category');
     	$suppliers = Supplier::when($category, function ($query) use($category){
     							return $query->where('category_id', $category);
     						})
-                            ->where('company_name', 'LIKE', '%'.$search)
-                            ->orWhere('company_name', 'LIKE' , $search.'%')
+                            ->where('company_name', 'LIKE', $search.'%')//Only the earched company is is displayed
                             ->where('state', "Accepted")
-                            ->orderByRaw("LOCATE('".$search."', company_name) ")
+    						->orderBy('rating', 'desc')
     						->paginate(12);
     	$categoriesList = Category::all();
     	

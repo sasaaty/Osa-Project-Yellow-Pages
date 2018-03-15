@@ -49,6 +49,7 @@
   <!-- Form
     –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <div class = "company page container" style="padding:20px">
+    <?php $title = "Suggestion Form"; ?>
     @include('Form')
   </div>
 
