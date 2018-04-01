@@ -43,17 +43,34 @@ class AuthController extends Controller
         ]);
     }
 
-    public function redirectToGoogle()
-    {
-      // Sends the user to Google
-        return Socialite::driver('google')->redirect();
+    public function redirect($provider){
+        return Socialite::driver($provider)->redirect();
     }
 
-    public function handleGoogleCallback()
-    {
-        $user = Socialite::driver('google')->user();
-        dd($user);
-          return redirect('');
+    public function handleProviderCallback($provider){
+        $socialite_user = Socialite::driver($provider)->user();
+        $socialite_id = $socialite_user->getId();
+        $user;
+
+        if($provider == "google"){
+            $user = User::where('google_id', $socialite_id)->first();
+
+            // register (if no user)
+            if (!$user) {
+                $user = new User;
+                $user->first_name = $socialite_user->user['name']['givenName'];
+                $user->last_name = $socialite_user->user['name']['familyName'];
+                $user->avatar = $socialite_user->avatar_original;
+                $user->email = $socialite_user->email;
+                $user->google_id = $socialite_id;
+                $user->account_type = "User";
+                $user->save();
+            }
+        }
+
+        Auth::loginUsingId($user->id);
+        
+        return redirect('/');
     }
 
     /*

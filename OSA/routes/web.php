@@ -35,13 +35,28 @@ Route::delete('Admin/Delete', 'AdminController@delete');
 Route::get('/Admin/Add', 'AdminController@add');
 
 // Google
+Route::get('/redirect/{provider}', 'Auth\AuthController@redirect');
+
+Route::get('/callback/{provider}', 'Auth\AuthController@handleProviderCallback');
+
 Route::get('google', function () {
     return view('googleAuth');
 });
-Route::get('auth/google', 'Auth\AuthController@redirectToGoogle');
-Route::get('auth/google/callback', 'Auth\AuthController@handleGoogleCallback');
 
-/*
-Route::get('auth/google', 'Auth\AuthController@redirectToGoogle');
-Route::get('auth/google/callback', 'Auth\AuthController@handleGoogleCallback');
-*/
+// Authentication Routes
+// Log in Routes...
+Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
+Route::post('login', 'Auth\LoginController@login');
+Route::post('logout', 'Auth\LoginController@logout')->name('logout');
+
+// Registration Routes...
+Route::get('register', 'Auth\RegisterController@showRegistrationForm')->name('register');
+Route::post('register', 'Auth\RegisterController@register');
+
+// Password Reset Routes...
+Route::get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
+Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
+Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
+Route::post('password/reset', 'Auth\ResetPasswordController@reset');
+
+Route::get('logout', 'Auth\LoginController@logout');

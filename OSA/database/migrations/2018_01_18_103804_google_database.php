@@ -8,13 +8,16 @@ class GoogleDatabase extends Migration
 {
     /**
      * Run the migrations.
+     * require to run 'composer require doctrine/dbal'
      *
      * @return void
      */
     public function up()
     {
-      Schema::table('users', function ($table) {
-      $table->string('google_id');
+      Schema::table('user', function ($table) {
+        $table->string('google_id');
+        $table->dropColumn('profile_pic');
+        $table->string('avatar');
       });
     }
 
@@ -25,8 +28,10 @@ class GoogleDatabase extends Migration
      */
     public function down()
     {
-      Schema::table('users', function ($table) {
-      $table->string('google_id');
+      Schema::table('user', function ($table) {
+        $table->string('google_id');
+        $table->binary('profile_pic');
+        $table->dropColumn('avatar');   
       });
     }
 }
