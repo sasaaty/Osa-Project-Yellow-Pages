@@ -9,7 +9,7 @@
 			<a href="{{ url('redirect/google') }}" class="btn btn-lg btn-danger btn-block">
 					<strong>Log in With Google</strong>
 			</a>
-			<a href="#">Suggest</a>
+			<a href="# ">Suggest</a>
 		@else
 			<a href="{{url('logout')}}"><strong>Log out</strong></a>
 			<a href="/Suggestion">Suggest</a>

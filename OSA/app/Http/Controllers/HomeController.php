@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Supplier;
 use App\Category;
+use Searchy;
 class HomeController extends Controller
 {
     //
@@ -14,17 +15,23 @@ class HomeController extends Controller
         $suppliers;
 
         if(!empty($search)){
-            $suppliers = Supplier::where('company_name', 'LIKE', '%'.$search)
-                                 ->orWhere('company_name', 'LIKE' , $search.'%')
-                                 ->orderByRaw("LOCATE('".$search."', company_name) ")
-                                 ->where('state', "Accepted")
-                                 ->paginate(12);
+
+            $suppliers = Searchy::search('supplier')
+                                ->fields('company_name', 'business_name', 'address')
+                                ->query($search)
+                                ->getQuery()
+                                ->when($category, function ($query) use($category){
+                                    return $query->where('category_id', $category);
+                                })
+                                ->where('state', "Accepted")
+                                ->simplePaginate(12);
         }else{        
         	$suppliers = Supplier::when($category, function ($query) use($category){
         							return $query->where('category_id', $category);
         						})
                                 ->where('state', "Accepted")
-        						->paginate(12);
+                                ->simplePaginate(12);
+
         }
         
     	$categoriesList = Category::all();

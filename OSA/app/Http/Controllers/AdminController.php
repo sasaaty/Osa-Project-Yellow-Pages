@@ -8,6 +8,7 @@ use App\Suggestion;
 use App\User;
 use App\Category;
 use App\Review;
+use Searchy;
 
 class AdminController extends Controller
 {
@@ -17,12 +18,16 @@ class AdminController extends Controller
         if($category == "All"){
         	$category = null;
         }
-    	$suppliers = Supplier::when($category, function ($query) use($category){
-    							return $query->where('category_id', $category);
+    	$suppliers = Searchy::search('supplier')
+                            ->fields('company_name', 'business_name', 'address')
+                            ->query($search)
+                            ->getQuery()
+                            ->when($category, function ($query) use($category){
+							return $query->where('category_id', $category);
     						})
     						->where('state', $view)
     						->orderBy('rating', 'desc')
-    						->paginate(12);
+    						->simplePaginate(12);
     	$categoriesList = Category::all();
     	
     	return view('Admin.Home', ['suppliers' => $suppliers, 'categories' => $categoriesList, 'current' => $category, 'search' => $search, 'view' => $view]);
